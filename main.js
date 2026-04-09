@@ -72,11 +72,24 @@ let hf = 10.67 * length * Math.pow(flow_m3s, 1.852) /
 // 🔹 حساب TDH
 let tdh = hf + elevation;
 
+  // 🔹 كفاءة المضخة
+let efficiency_pump = 0.75;
+
+// 🔹 حساب القدرة الهيدروليكية
+let power_watt = 1000 * 9.81 * flow_m3s * tdh;
+
+// 🔹 القدرة الفعلية
+let power_kw = (power_watt / efficiency_pump) / 1000;
+
+// 🔹 عرض النتيجة
+document.querySelectorAll(".box span")[3].innerText = power_kw.toFixed(2);
+
 
 // 🔹 عرض النتائج
 document.querySelectorAll(".box span")[0].innerText = flow.toFixed(2);
 document.querySelectorAll(".box span")[4].innerText = diameter.toFixed(3);
 document.querySelectorAll(".box span")[1].innerText = hf.toFixed(2);
 document.querySelectorAll(".box span")[2].innerText = tdh.toFixed(2);
+document.querySelectorAll(".box span")[3].innerText = power_kw.toFixed(2);
 
 }
