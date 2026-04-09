@@ -17,13 +17,17 @@ body {
 }
 
 .container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
   height: 80vh;
+  gap: 10px;
 }
 
 .panel {
-  padding: 15px;
-  border-right: 1px solid #1e293b;
+  background: #020617;
+  padding: 10px;
+  border: 1px solid #1e293b;
+  overflow-y: auto;
 }
 
 .left {
