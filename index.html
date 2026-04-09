@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Smart-Irrigation-Designer</title>
+  <title>Smart Irrigation DCS</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-  <h1>AquaDesign AI</h1>
-  <p>Smart Irrigation System Design</p>
-</header>
+<div class="header">
+  <h1>IRRIGATION DCS</h1>
+  <div class="status running">SYSTEM ONLINE</div>
+</div>
 
 <div class="container">
 
-  <div class="sidebar">
-    <h3>Inputs</h3>
+  <!-- LEFT PANEL -->
+  <div class="panel left">
+    <h3>INPUTS</h3>
 
     <label>System Type</label>
     <select id="system">
@@ -45,14 +46,50 @@
       <option value="steel">Steel</option>
     </select>
 
-    <button onclick="calculate()">Run Design</button>
+    <button onclick="calculate()">RUN</button>
   </div>
 
-  <div class="main">
-    <h2>Results</h2>
-    <div id="results"></div>
+  <!-- CENTER PANEL -->
+  <div class="panel center">
+    <h3>PROCESS</h3>
+
+    <div class="box">
+      <p>FLOW RATE</p>
+      <span id="flow">0</span>
+    </div>
+
+    <div class="box">
+      <p>HEAD LOSS</p>
+      <span id="headloss">0</span>
+    </div>
+
+    <div class="box">
+      <p>TDH</p>
+      <span id="tdh">0</span>
+    </div>
+
   </div>
 
+  <!-- RIGHT PANEL -->
+  <div class="panel right">
+    <h3>PUMP</h3>
+
+    <div class="box">
+      <p>POWER (kW)</p>
+      <span id="power">0</span>
+    </div>
+
+    <div class="box">
+      <p>PIPE DIAMETER</p>
+      <span id="diameter">0</span>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  SYSTEM LOG: Ready...
 </div>
 
 <script src="main.js"></script>
