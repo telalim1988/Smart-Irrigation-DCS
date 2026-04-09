@@ -1,114 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Smart Irrigation DCS</title>
+  <meta charset="UTF-8">
+  <title>Irrigation DCS</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
-  <h1>SMART-IRRIGATION-DCS</h1>
-  <div class="status running">SYSTEM ONLINE</div>
+  <h1>IRRIGATION DCS</h1>
+  <div class="status">SYSTEM ONLINE</div>
 </div>
 
-<div class="panel left">
+<!-- MAIN GRID -->
+<div class="container">
 
-  <h3>CONTROL PANEL</h3>
+  <!-- LEFT PANEL (INPUTS) -->
+  <div class="panel">
 
-  <div class="section">
+    <h3>CONTROL PANEL</h3>
 
     <div class="card">
       <h4>System</h4>
-      <select id="system">
-        <option value="drip">Drip</option>
-        <option value="sprinkler">Sprinkler</option>
+      <select>
+        <option>Drip</option>
+        <option>Sprinkler</option>
       </select>
     </div>
 
     <div class="card">
-      <h4>Water</h4>
-      <input id="et0" type="number" placeholder="ET0 (mm/day)">
-      <input id="kc" type="number" placeholder="Kc">
+      <h4>Water Requirement</h4>
+      <input type="number" placeholder="ET0 (mm/day)">
+      <input type="number" placeholder="Kc">
     </div>
 
     <div class="card">
       <h4>Field</h4>
-      <input id="area" type="number" placeholder="Area (m²)">
-      <input id="zones" type="number" placeholder="Zones">
+      <input type="number" placeholder="Area (m²)">
+      <input type="number" placeholder="Zones">
     </div>
 
     <div class="card">
       <h4>Operation</h4>
-      <input id="hours" type="number" placeholder="Hours/day">
+      <input type="number" placeholder="Operating Hours/day">
     </div>
 
     <div class="card">
       <h4>Hydraulics</h4>
-      <input id="length" type="number" placeholder="Pipe Length (m)">
-      <input id="elevation" type="number" placeholder="Elevation (m)">
-      <input id="velocity" type="number" placeholder="Velocity (m/s)">
+      <input type="number" placeholder="Pipe Length (m)">
+      <input type="number" placeholder="Elevation (m)">
+      <input type="number" placeholder="Velocity (m/s)">
     </div>
 
     <div class="card">
       <h4>Material</h4>
-      <select id="material">
-        <option value="pvc">PVC</option>
-        <option value="hdpe">HDPE</option>
-        <option value="steel">Steel</option>
+      <select>
+        <option>PVC</option>
+        <option>HDPE</option>
+        <option>Steel</option>
       </select>
     </div>
 
+    <button class="run-btn">RUN DESIGN</button>
+
   </div>
 
-  <button class="run-btn" onclick="calculate()">RUN DESIGN</button>
+  <!-- CENTER PANEL (PROCESS) -->
+  <div class="panel">
 
-</div>
-
-  <!-- CENTER PANEL -->
-  <div class="panel center">
     <h3>PROCESS</h3>
 
     <div class="box">
       <p>FLOW RATE</p>
-      <span id="flow">0</span>
+      <span>0</span>
     </div>
 
     <div class="box">
       <p>HEAD LOSS</p>
-      <span id="headloss">0</span>
+      <span>0</span>
     </div>
 
     <div class="box">
       <p>TDH</p>
-      <span id="tdh">0</span>
+      <span>0</span>
     </div>
 
   </div>
 
-  <!-- RIGHT PANEL -->
-  <div class="panel right">
+  <!-- RIGHT PANEL (PUMP) -->
+  <div class="panel">
+
     <h3>PUMP</h3>
 
     <div class="box">
       <p>POWER (kW)</p>
-      <span id="power">0</span>
+      <span>0</span>
     </div>
 
     <div class="box">
       <p>PIPE DIAMETER</p>
-      <span id="diameter">0</span>
+      <span>0</span>
     </div>
 
   </div>
 
 </div>
 
+<!-- FOOTER -->
 <div class="footer">
   SYSTEM LOG: Ready...
 </div>
-
-<script src="main.js"></script>
 
 </body>
 </html>
