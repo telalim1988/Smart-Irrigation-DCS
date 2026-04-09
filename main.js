@@ -56,6 +56,18 @@ let flow_m3s = flow / 3600;
 // 🔹 حساب القطر
 let diameter = Math.sqrt((4 * flow_m3s) / (Math.PI * velocity));
 
+  let emitter_flow = parseFloat(document.getElementById("emitter_flow").value);
+
+if (!isNaN(emitter_flow)) {
+
+  // تحويل L/hr → m³/hr
+  let emitter_m3hr = emitter_flow / 1000;
+
+  let emitters = flow_zone / emitter_m3hr;
+
+  console.log("Number of Emitters:", emitters.toFixed(0));
+}
+
   // 🔹 قراءة البيانات
 let length = parseFloat(document.getElementById("length").value);
 let elevation = parseFloat(document.getElementById("elevation").value);
