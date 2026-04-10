@@ -50,43 +50,7 @@ if (isNaN(velocity)) {
   return;
 }
 
-// 🔹 حساب القطر
-let diameter = Math.sqrt((4 * flow_m3s) / (Math.PI * velocity));
-  
-
-
-// 🔹 اختيار أقرب قطر أكبر
-let std_diameter = standard_diameters.find(d => d >= diameter);
-
-// لو لم يوجد (قطر كبير جدًا)
-if (!std_diameter) {
-  std_diameter = standard_diameters[standard_diameters.length - 1];
-}
-// 🔹 قائمة الأقطار القياسية (بالمتر)
-let standard_diameters = [
-  0.020, 0.025, 0.032, 0.040, 0.050,
-  0.063, 0.075, 0.090, 0.110, 0.160
-];
-  // 🔹 إعادة حساب Head Loss باستخدام القطر القياسي
-let hf_std = 10.67 * length * Math.pow(flow_m3s, 1.852) /
-             (Math.pow(C, 1.852) * Math.pow(std_diameter, 4.87));
-    
-// 🔹 TDH جديد
-let tdh_std = hf_std + elevation;
-
-let emitter_flow = parseFloat(document.getElementById("emitter_flow").value);
-
-if (!isNaN(emitter_flow)) {
-
-  // تحويل L/hr → m³/hr
-  let emitter_m3hr = emitter_flow / 1000;
-
-  let emitters = flow_zone / emitter_m3hr;
-
-  console.log("Number of Emitters:", emitters.toFixed(0));
-}
-
-  // 🔹 قراءة البيانات
+// 🔹 قراءة البيانات
 let length = parseFloat(document.getElementById("length").value);
 let elevation = parseFloat(document.getElementById("elevation").value);
 let material = document.getElementById("material").value;
@@ -108,6 +72,9 @@ if (material === "pvc") {
   C = 120;
 }
 
+// 🔹 حساب القطر
+let diameter = Math.sqrt((4 * flow_m3s) / (Math.PI * velocity));
+
 // 🔹 حساب Head Loss
 let hf = 10.67 * length * Math.pow(flow_m3s, 1.852) /
          (Math.pow(C, 1.852) * Math.pow(diameter, 4.87));
@@ -115,19 +82,51 @@ let hf = 10.67 * length * Math.pow(flow_m3s, 1.852) /
 // 🔹 حساب TDH
 let tdh = hf + elevation;
 
-  // 🔹 كفاءة المضخة
+// 🔹 قائمة الأقطار القياسية
+let standard_diameters = [
+  0.020, 0.025, 0.032, 0.040, 0.050,
+  0.063, 0.075, 0.090, 0.110, 0.160
+];
+
+// 🔹 اختيار القطر القياسي
+let std_diameter = standard_diameters.find(d => d >= diameter);
+
+if (!std_diameter) {
+  std_diameter = standard_diameters[standard_diameters.length - 1];
+}
+
+// 🔹 إعادة حساب Head Loss بالقطر القياسي
+let hf_std = 10.67 * length * Math.pow(flow_m3s, 1.852) /
+             (Math.pow(C, 1.852) * Math.pow(std_diameter, 4.87));
+
+// 🔹 TDH جديد
+let tdh_std = hf_std + elevation;
+
+// 🔹 حساب عدد النقاط
+let emitter_flow = parseFloat(document.getElementById("emitter_flow").value);
+
+if (!isNaN(emitter_flow)) {
+
+  let emitter_m3hr = emitter_flow / 1000;
+
+  let emitters = flow_zone / emitter_m3hr;
+
+  console.log("Number of Emitters:", emitters.toFixed(0));
+}
+
+// 🔹 كفاءة المضخة
 let efficiency_pump = 0.75;
 
-// 🔹 حساب القدرة الهيدروليكية
+// 🔹 القدرة الهيدروليكية
 let power_watt = 1000 * 9.81 * flow_m3s * tdh;
 
 // 🔹 القدرة الفعلية
 let power_kw = (power_watt / efficiency_pump) / 1000;
 
-  // نبدأ برسالة افتراضية
+// 🔹 Alerts
 let alertMessage = "OK";
 
-// 🔴 Velocity
+// Velocity
 if (velocity < 0.6) {
   alertMessage = "⚠️ Low Velocity";
 }
@@ -136,12 +135,12 @@ if (velocity > 2) {
   alertMessage = "⚠️ High Velocity";
 }
 
-// 🔴 Diameter
+// Diameter
 if (diameter < 0.02) {
   alertMessage = "⚠️ Pipe Too Small";
 }
 
-// 🔴 Head Loss Ratio
+// Head Loss
 let hf_ratio = hf / tdh;
 
 if (hf_ratio > 0.5) {
@@ -149,8 +148,7 @@ if (hf_ratio > 0.5) {
 } else if (hf_ratio > 0.3) {
   alertMessage = "⚠️ Moderate Head Loss";
 }
-
-
+  
 // 🔹 عرض النتائج
 document.querySelectorAll(".box span")[0].innerText = flow_zone.toFixed(2);
 document.querySelectorAll(".box span")[1].innerText = hf_std.toFixed(2);
