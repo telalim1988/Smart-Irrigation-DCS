@@ -53,11 +53,7 @@ if (isNaN(velocity)) {
 // 🔹 حساب القطر
 let diameter = Math.sqrt((4 * flow_m3s) / (Math.PI * velocity));
   
-  // 🔹 قائمة الأقطار القياسية (بالمتر)
-let standard_diameters = [
-  0.020, 0.025, 0.032, 0.040, 0.050,
-  0.063, 0.075, 0.090, 0.110, 0.160
-];
+
 
 // 🔹 اختيار أقرب قطر أكبر
 let std_diameter = standard_diameters.find(d => d >= diameter);
@@ -66,11 +62,15 @@ let std_diameter = standard_diameters.find(d => d >= diameter);
 if (!std_diameter) {
   std_diameter = standard_diameters[standard_diameters.length - 1];
 }
-
+// 🔹 قائمة الأقطار القياسية (بالمتر)
+let standard_diameters = [
+  0.020, 0.025, 0.032, 0.040, 0.050,
+  0.063, 0.075, 0.090, 0.110, 0.160
+];
   // 🔹 إعادة حساب Head Loss باستخدام القطر القياسي
 let hf_std = 10.67 * length * Math.pow(flow_m3s, 1.852) /
              (Math.pow(C, 1.852) * Math.pow(std_diameter, 4.87));
-
+    
 // 🔹 TDH جديد
 let tdh_std = hf_std + elevation;
 
