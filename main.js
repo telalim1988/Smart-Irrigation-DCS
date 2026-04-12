@@ -366,9 +366,7 @@ for (let q of curve_flow) {
 // 🔹 FIND INTERSECTION
 // =========================
 
-let intersection_flow = 0;
-let intersection_head = 0;
-let min_diff = Infinity;
+
 
 for (let i = 0; i < curve_flow.length; i++) {
 
