@@ -1,3 +1,12 @@
+// 🔹 قاعدة بيانات مضخات (مبسطة)
+let pumps = [
+  { name: "Pump A", flow: 1, head: 10 },
+  { name: "Pump B", flow: 2, head: 20 },
+  { name: "Pump C", flow: 5, head: 30 },
+  { name: "Pump D", flow: 10, head: 40 }
+];
+
+
 function calculate() {
 
   let et0 = parseFloat(document.getElementById("et0").value);
@@ -217,6 +226,27 @@ if (head_req < 10) {
   pump_type = "High Head Multistage Pump";
 }
 
+  
+// 🔹 القيم المطلوبة
+let required_flow = flow_zone;
+let required_head = tdh_std;
+
+// 🔹 البحث عن أفضل Pump
+let best_pump = null;
+let min_error = Infinity;
+
+for (let pump of pumps) {
+
+  let error = Math.abs(pump.flow - required_flow) +
+              Math.abs(pump.head - required_head);
+
+  if (error < min_error) {
+    min_error = error;
+    best_pump = pump;
+  }
+}
+
+// 🔹 عرض النتيجة
 
   
 // 🔹 عرض النتائج
@@ -233,4 +263,9 @@ document.getElementById("opt_diameter").innerText = best_diameter.toFixed(3);
 document.getElementById("pump_select").innerText =
   pump_type + " | Flow: " + flow_req.toFixed(2) +
   " m³/hr | Head: " + head_req.toFixed(2) + " m";
+document.getElementById("pump_select").innerText =
+  best_pump.name +
+  " | Flow: " + best_pump.flow +
+  " m³/hr | Head: " + best_pump.head + " m";
+
 }
