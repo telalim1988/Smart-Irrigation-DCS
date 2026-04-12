@@ -134,7 +134,7 @@ let hf_std = 10.67 * length * Math.pow(flow_m3s, 1.852) /
 let tdh_std = hf_std + elevation;
 
   // 🔹 حساب Head من منحنى المضخة
-let pump_head = interpolateHead(parseFloat(flow_pump.toFixed(2)), pump_curve);
+let pump_head = interpolateHead(Number(flow_pump), pump_curve);
 
 let pump_status = "UNKNOWN";
 
@@ -294,7 +294,7 @@ for (let pump of pumps) {
 document.querySelectorAll(".box span")[0].innerText = flow_zone.toFixed(2);
 document.querySelectorAll(".box span")[1].innerText = hf_std.toFixed(2);
 document.querySelectorAll(".box span")[2].innerText = tdh_std.toFixed(2);
-document.querySelectorAll(".box span")[3].innerText = power_kw.toFixed(2);
+document.querySelectorAll(".box span")[3].innerText = power_kw.toFixed(4);
 document.querySelectorAll(".box span")[4].innerText = diameter.toFixed(3);
 document.getElementById("std_diameter").innerText = std_diameter.toFixed(3);
 document.getElementById("alerts").innerText = alertMessage;
