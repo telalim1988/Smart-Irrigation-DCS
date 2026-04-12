@@ -133,6 +133,20 @@ let hf_std = 10.67 * length * Math.pow(flow_m3s, 1.852) /
 // 🔹 TDH جديد
 let tdh_std = hf_std + elevation;
 
+  // 🔹 حساب Head من منحنى المضخة
+let pump_head = interpolateHead(flow_pump, pump_curve);
+
+let pump_status = "";
+
+// 🔴 مقارنة مع المطلوب
+if (pump_head === null) {
+  pump_status = "❌ Flow outside pump curve";
+} else if (pump_head >= tdh_std) {
+  pump_status = "✔️ Pump Suitable";
+} else {
+  pump_status = "⚠️ Pump cannot meet required head";
+}
+
 // 🔹 حساب عدد النقاط
 let emitter_flow = parseFloat(document.getElementById("emitter_flow").value);
 
@@ -293,3 +307,26 @@ document.getElementById("pump_select").innerText =
 }
 
 document.getElementById("pump_flow").innerText = flow_pump.toFixed(2);
+
+
+function interpolateHead(flow, curve) {
+
+  for (let i = 0; i < curve.length - 1; i++) {
+
+    let p1 = curve[i];
+    let p2 = curve[i + 1];
+
+    if (flow >= p1.flow && flow <= p2.flow) {
+
+      // Linear interpolation
+      let head = p1.head + 
+        ( (flow - p1.flow) / (p2.flow - p1.flow) ) * 
+        (p2.head - p1.head);
+
+      return head;
+    }
+  }
+
+  return null; // خارج المنحنى
+}
+
