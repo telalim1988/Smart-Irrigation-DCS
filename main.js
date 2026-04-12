@@ -134,7 +134,7 @@ let hf_std = 10.67 * length * Math.pow(flow_m3s, 1.852) /
 let tdh_std = hf_std + elevation;
 
   // 🔹 حساب Head من منحنى المضخة
-let pump_head = interpolateHead(flow_pump, pump_curve);
+let pump_head = interpolateHead(parseFloat(flow_pump.toFixed(2)), pump_curve);
 
 let pump_status = "UNKNOWN";
 
@@ -302,16 +302,16 @@ document.getElementById("recommendation").innerText = recommendation;
 document.getElementById("opt_velocity").innerText = best_velocity.toFixed(2);
 document.getElementById("opt_diameter").innerText = best_diameter.toFixed(3);
 document.getElementById("pump_select").innerText =
-  pump_type + " | Flow: " + flow_req.toFixed(2) +
-  " m³/hr | Head: " + head_req.toFixed(2) + " m";
-document.getElementById("pump_select").innerText =
   best_pump.name +
   " | Flow: " + best_pump.flow +
   " m³/hr | Head: " + best_pump.head + " m";
 
+
+  
+document.getElementById("pump_flow").innerText = flow_pump.toFixed(2);
 }
 
-document.getElementById("pump_flow").innerText = flow_pump.toFixed(2);
+
 
 
 
