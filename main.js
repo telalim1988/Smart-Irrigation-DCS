@@ -291,6 +291,8 @@ for (let pump of pumps) {
 if (typeof std_d === "undefined") {
   console.error("std_d NOT DEFINED");
 }
+
+  console.log(std_d, best_velocity, best_diameter);
   
 // 🔹 عرض النتائج
 document.getElementById("flow_rate").innerText = flow_zone.toFixed(2);
