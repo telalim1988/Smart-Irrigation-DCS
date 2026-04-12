@@ -373,50 +373,55 @@ if (window.chart) {
 // رسم جديد
 window.chart = new Chart(ctx, {
   type: "line",
+
   data: {
     labels: curve_flow,
-   datasets: [
-  {
-    label: "Pump Curve",
-    data: curve_head,
-    borderWidth: 3,
-    tension: 0.4,
-    fill: false
-  },
-  {
-    label: "System Curve",
-    data: system_curve,
-    borderDash: [5, 5],
-    borderWidth: 2,
-    fill: false
-  },
-  {
-    label: "Operating Point",
-    data: [{
-      x: flow_pump,
-      y: tdh
-    }],
-    type: "scatter",
-    pointRadius: 6,
-    pointBackgroundColor: "red"
-  }
-],
+    datasets: [
+      {
+        label: "Pump Curve",
+        data: curve_head,
+        borderWidth: 3,
+        tension: 0.4,
+        fill: false
+      },
+      {
+        label: "System Curve",
+        data: system_curve,
+        borderDash: [5, 5],
+        borderWidth: 2,
+        fill: false
+      },
+      {
+        label: "Operating Point",
+        data: [{
+          x: flow_pump,
+          y: tdh
+        }],
+        type: "scatter",
+        pointRadius: 6,
+        pointBackgroundColor: "red"
+      }
+    ]
+  }, // 🔴 فاصلة مهمة هنا
+
   options: {
-   scales: {
-  x: {
-    title: {
-      display: true,
-      text: "Flow (m³/hr)"
-    }
-  },
-  y: {
-    title: {
-      display: true,
-      text: "Head (m)"
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: "Flow (m³/hr)"
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Head (m)"
+        }
+      }
     }
   }
-}
-}
+
+}); // 🔴 هذا القوس + السيمي كولون كانوا ناقصين
   
   
 // 🔹 عرض النتائج
