@@ -400,7 +400,7 @@ window.chart = new Chart(ctx, {
     pointRadius: 6,
     pointBackgroundColor: "red"
   }
-]
+],
   options: {
    scales: {
   x: {
