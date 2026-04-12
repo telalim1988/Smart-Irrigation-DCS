@@ -335,9 +335,33 @@ if (typeof std_d === "undefined") {
 let ctx = document.getElementById("pumpChart").getContext("2d");
 
 // تجهيز بيانات المنحنى
-let curve_flow = pump_curve.map(p => p.flow);
-let curve_head = pump_curve.map(p => p.head);
+let curve_flow = [];
+let curve_head = [];
 
+let curve_flow = [];
+let curve_head = [];
+
+for (let q = 0; q <= 5; q += 0.1) {
+  curve_flow.push(q);
+  curve_head.push(interpolateHead(q, pump_curve));
+}
+// =========================
+// 🔹 SYSTEM CURVE
+// =========================
+
+let system_curve = [];
+
+for (let q of curve_flow) {
+
+  let q_m3s = q / 3600;
+
+  let h_system = elevation +
+    (10.67 * length * Math.pow(q_m3s, 1.852)) /
+    (Math.pow(C, 1.852) * Math.pow(std_diameter, 4.87));
+
+  system_curve.push(h_system);
+}
+  
 // نقطة التشغيل
 let operating_point = {
   x: flow_pump,
