@@ -325,16 +325,24 @@ function interpolateHead(flow, curve) {
 
     if (flow >= p1.flow && flow <= p2.flow) {
 
-      // Linear interpolation
-      let head = p1.head + 
-        ( (flow - p1.flow) / (p2.flow - p1.flow) ) * 
+      let head = p1.head +
+        ((flow - p1.flow) / (p2.flow - p1.flow)) *
         (p2.head - p1.head);
 
       return head;
     }
   }
 
-  return null; // خارج المنحنى
-}
+  // 🔥 إذا أقل من أول نقطة
+  if (flow < curve[0].flow) {
+    return curve[0].head;
+  }
 
+  // 🔥 إذا أكبر من آخر نقطة
+  if (flow > curve[curve.length - 1].flow) {
+    return curve[curve.length - 1].head;
+  }
+
+  return null;
+}
 
